@@ -1,0 +1,7 @@
+@RestController
+@RestController est la combinaison des annotations @controller (SpringBoot) qui précise que la classe
+ est un controller capable de gérer des requêtes, et @responsebody.
+
+ @RequestMapping permet de faire le lien entre une URI, une méthode http et une methode java.
+ @GetMapping et autre, est un raccourci de RequestMapping + methode http etc...
+
