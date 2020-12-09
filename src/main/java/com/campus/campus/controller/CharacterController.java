@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class CharacterController {
@@ -22,9 +23,9 @@ public class CharacterController {
     }
 
     @GetMapping(value = "/characters/{id}")
-    public ResponseEntity<Character> characterDisplay(@PathVariable int id){
+    public ResponseEntity<Optional<Character>> characterDisplay(@PathVariable int id){
         ResponseEntity res;
-        Character character = characterDAO.findById(id);
+        Optional<Character> character = characterDAO.findById(id);
         if(character == null){
             res = new ResponseEntity(HttpStatus.NOT_FOUND);
         } else {
@@ -35,7 +36,7 @@ public class CharacterController {
 
     @PutMapping(value = "/characters")
     public ResponseEntity characterUpdate(@RequestBody Character character){
-        Character updatedCharacter = characterDAO.update(character);
+        Optional<Character> updatedCharacter = characterDAO.update(character);
         ResponseEntity res;
         if(updatedCharacter == null){
             res = new ResponseEntity(HttpStatus.NOT_FOUND);

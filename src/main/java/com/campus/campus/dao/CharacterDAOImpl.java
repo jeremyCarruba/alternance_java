@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class CharacterDAOImpl implements CharacterDAO {
@@ -23,13 +24,14 @@ public class CharacterDAOImpl implements CharacterDAO {
     }
 
     @Override
-    public Character findById(int id) {
+    public Optional<Character> findById(int id) {
+        Optional<Character> opt = null;
         for (Character character : characters) {
-            if(character.getId() ==id){
-                return character;
+            if(character.getId() == id){
+                opt = Optional.ofNullable(character);
             }
         }
-        return null;
+        return opt;
     }
 
     @Override
@@ -40,31 +42,29 @@ public class CharacterDAOImpl implements CharacterDAO {
     }
 
     @Override
-    public Character update(Character character) {
-        for(Character charac : characters){
-            if(charac.getId() == character.getId()){
-                int index = characters.indexOf(charac);
-                if(index == -1) {
-                    character = null;
-                } else {
+    public Optional<Character> update(Character character) {
+        Optional<Character> opt = null;
+        for(Character characterToUpdate : characters){
+            if(characterToUpdate.getId() == character.getId()){
+                int index = characters.indexOf(characterToUpdate);
                     characters.set(index, character);
-                }
+                    opt = Optional.ofNullable(character);
             }
         }
-        return character;
+        return opt;
     }
 
     @Override
     public Boolean delete(int id) {
-        Boolean found = false;
+        Boolean deleted = false;
         Iterator<Character> iter = characters.iterator();
         while(iter.hasNext()){
             if(iter.next().getId() == id) {
-                found = true;
                 iter.remove();
+                deleted = true;
                 break;
             }
         }
-        return found;
+        return deleted;
     }
 }
