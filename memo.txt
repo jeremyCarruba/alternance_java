@@ -2,6 +2,11 @@
 @RestController est la combinaison des annotations @controller (SpringBoot) qui précise que la classe
  est un controller capable de gérer des requêtes, et @responsebody.
 
+ @RequestBody dit à spring de serialiser un java en JSON pour l'envoyer ou de déserialiser un JSON pour le transformer en POJO et l'utiliser au
+ sein de l'app
+
  @RequestMapping permet de faire le lien entre une URI, une méthode http et une methode java.
  @GetMapping et autre, est un raccourci de RequestMapping + methode http etc...
 
+@Repository est une annotation qui indique à Spring qu'il s'agit d'une classe qui gère les données.
+@Autowired dit à Spring de se charger de fabriquer une instance de ce qui suit.
