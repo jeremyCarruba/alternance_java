@@ -3,6 +3,7 @@ package com.campus.campus.dao;
 import com.campus.campus.model.Character;
 import org.springframework.stereotype.Repository;
 
+import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -18,6 +19,8 @@ public class CharacterDAOImpl implements CharacterDAO {
         characters.add(new Character(3, new String("La fouine"), new String("Sorcier")));
     }
 
+    private int counter = 4;
+
     @Override
     public List<Character> findAll() {
         return characters;
@@ -25,10 +28,10 @@ public class CharacterDAOImpl implements CharacterDAO {
 
     @Override
     public Optional<Character> findById(int id) {
-        Optional<Character> opt = null;
+        Optional<Character> opt = Optional.empty();
         for (Character character : characters) {
             if(character.getId() == id){
-                opt = Optional.ofNullable(character);
+                opt = Optional.of(character);
             }
         }
         return opt;
@@ -36,19 +39,20 @@ public class CharacterDAOImpl implements CharacterDAO {
 
     @Override
     public Character save(Character character) {
-        Character newChar = new Character(characters.size() + 1, character.getName(), character.getType());
+        Character newChar = new Character(counter, character.getName(), character.getType());
         characters.add(newChar);
+        counter++;
         return newChar;
     }
 
     @Override
     public Optional<Character> update(Character character) {
-        Optional<Character> opt = null;
+        Optional<Character> opt = Optional.empty();
         for(Character characterToUpdate : characters){
             if(characterToUpdate.getId() == character.getId()){
                 int index = characters.indexOf(characterToUpdate);
                     characters.set(index, character);
-                    opt = Optional.ofNullable(character);
+                    opt = Optional.of(character);
             }
         }
         return opt;
