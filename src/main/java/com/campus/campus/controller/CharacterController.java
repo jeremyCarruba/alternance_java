@@ -33,7 +33,7 @@ public class CharacterController {
         if(character.isEmpty()){
             res = new ResponseEntity(HttpStatus.NOT_FOUND);
         } else {
-            res = new ResponseEntity<>(characterDAO.findById(id), HttpStatus.OK);
+            res = new ResponseEntity<>(character, HttpStatus.OK);
         }
         return res;
     }

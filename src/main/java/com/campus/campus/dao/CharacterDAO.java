@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Optional;
 
 import com.campus.campus.model.Character;
-public interface CharacterDAO {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CharacterDAO extends JpaRepository<Character, Integer> {
     public List<Character> findAll();
     public Optional<Character> findById(int id);
     public Character save(Character character);
